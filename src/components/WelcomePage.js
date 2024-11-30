@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../hooks/useAuthContext";
 
 const WelcomePage = () => {
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
     const navigate = useNavigate();
+    const { login } = useAuth();
 
     const handlePasswordChange = (e) => {
         setPassword(e.target.value);
@@ -16,6 +18,7 @@ const WelcomePage = () => {
         const correctPassword = "michi";
 
         if (password === correctPassword) {
+            login();
             navigate("/avatar");
         } else {
             setError("Contraseña incorrecta. Intenta de nuevo.");
@@ -28,7 +31,8 @@ const WelcomePage = () => {
                 <div>
                     <h1>Bienvenido</h1>
                     <form onSubmit={handleSubmit}>
-                        <label htmlFor="password">Contraseña: </label>
+                        <label htmlFor="password">Ingresa la palabra clave </label>
+                        <br/>
                         <input
                             type="password"
                             id="password"

@@ -222,8 +222,8 @@ const Main = () => {
       <section>
         <div>
           <h1>Generador de Mishis Avatares.</h1>
-          <RandomAvatar assets={assets} />
         </div>
+        <RandomAvatar assets={assets} />
       </section>
     </main>
   );

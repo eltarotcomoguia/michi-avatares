@@ -1,6 +1,6 @@
 import React, { useState, useRef } from "react";
 
-const RandomAvatar = ({ assets, width = 512, height = 512 }) => {
+const RandomAvatar = ({ assets, width = 256, height = 256 }) => {
     const canvasRef = useRef(null);
     const [layers, setLayers] = useState([]);
 
