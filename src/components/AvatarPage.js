@@ -1,5 +1,7 @@
 import React from "react";
 import RandomAvatar from "./RandomAvatar";
+import {GlobalStyle} from '../Styles/GlobalStyle';
+import { Mainn, Section, Div, Title } from "../Styles/Style";
 
 import F1 from "../image/Fondos/F1.PNG";
 import F2 from "../image/Fondos/F2.PNG";
@@ -103,6 +105,7 @@ import M26 from "../image/Manos/M26.PNG";
 import M27 from "../image/Manos/M27.PNG";
 import M28 from "../image/Manos/M28.PNG";
 import M29 from "../image/Manos/M29.PNG";
+
 
 
 const Main = () => {
@@ -218,14 +221,15 @@ const Main = () => {
   };
 
   return (
-    <main>
-      <section>
-        <div>
-          <h1>Generador de Mishis Avatares.</h1>
-        </div>
+    <Mainn>
+      <GlobalStyle/>
+      <Section>
+        <Div texto>
+          <Title>Generador de Mishis Avatares.</Title>
+        </Div>
         <RandomAvatar assets={assets} />
-      </section>
-    </main>
+      </Section>
+    </Mainn>
   );
 };
 

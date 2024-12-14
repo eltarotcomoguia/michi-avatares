@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../hooks/useAuthContext";
+import {GlobalStyle} from '../Styles/GlobalStyle'
+import {Mainn, Section, Div, Title, Label, Input, Button, I} from '../Styles/Style'
 
 const WelcomePage = () => {
     const [password, setPassword] = useState("");
@@ -26,25 +28,27 @@ const WelcomePage = () => {
     };
 
     return (
-        <main>
-            <section>
-                <div>
-                    <h1>Bienvenido</h1>
+        <Mainn>
+            <GlobalStyle/>
+            <Section seguridad>
+                <I/>
+                <Div texto>
+                    <Title>Bienvenido</Title>
                     <form onSubmit={handleSubmit}>
-                        <label htmlFor="password">Ingresa la palabra clave </label>
-                        <br/>
-                        <input
+                        <Label htmlFor="password">Ingresa la palabra clave </Label>
+
+                        <Input
                             type="password"
                             id="password"
                             value={password}
                             onChange={handlePasswordChange}
                         />
-                        <button type="submit">Entrar</button>
+                        <Button siguiente type="submit">Entrar</Button>
                     </form>
                     {error && <p style={{ color: "red" }}>{error}</p>}
-                </div>
-            </section>
-        </main>
+                </Div>
+            </Section>
+        </Mainn>
     );
 };
 

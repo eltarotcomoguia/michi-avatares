@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
+import { Button, Div, ElegantImage, ElegantCanvas } from '../Styles/Style';   
 
 const RandomAvatar = ({ assets, width = 256, height = 256 }) => {
     const canvasRef = useRef(null);
@@ -98,45 +99,41 @@ const RandomAvatar = ({ assets, width = 256, height = 256 }) => {
     };
 
     return (
-        <div>
+        <Div texto>
             {imageState === "default" && (
-                <img
+                <ElegantImage
                     src={defaultImage}
                     alt="Default"
                     width={width}
                     height={height}
-                    style={{ border: "1px solid #ccc", marginBottom: "10px" }}
                 />
             )}
             {imageState === "loading" && (
-                <img
+                <ElegantImage
                     src={loadingGif}
                     alt="Loading"
                     width={width}
                     height={height}
-                    style={{ border: "1px solid #ccc", marginBottom: "10px" }}
                 />
             )}
             {/* El canvas siempre está presente pero oculto si no es necesario */}
-            <canvas
+            <ElegantCanvas
                 ref={canvasRef}
                 width={width}
                 height={height}
                 style={{
-                    border: "1px solid #ccc",
-                    marginBottom: "10px",
-                    display: imageState === "avatar" ? "block" : "none",
+                    display: imageState === "avatar" ? "inline" : "none",
                 }}
             />
-            <div>
-                <button onClick={generateRandomAvatar} disabled={isGenerating}>
+            <Div boton>
+                <Button atras onClick={generateRandomAvatar} disabled={isGenerating}>
                     {isGenerating ? "Generando..." : "Generar Michi Avatar"}
-                </button>
-                <button onClick={downloadAvatar} disabled={isGenerating}>
+                </Button>
+                <Button siguiente onClick={downloadAvatar} disabled={isGenerating}>
                     Descargar Avatar
-                </button>
-            </div>
-        </div>
+                </Button>
+            </Div>
+        </Div>
     );
 };
 
