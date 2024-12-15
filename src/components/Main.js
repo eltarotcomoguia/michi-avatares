@@ -8,7 +8,7 @@ import AvatarPage from "./AvatarPage.js";
 const Main = () => {
     return (
         <AuthProvider>
-            <Router>
+            <Router basename="/michi-avatares">
                 <Routes>
                     <Route path="/" element={<WelcomePage />} />
                     <Route path="/avatar"
