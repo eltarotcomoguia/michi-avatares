@@ -1,4 +1,4 @@
-import fondo1 from '../image/Fondo/fondo1.jpeg';
+import fondo1 from '../image/Fondo/fondo1.jpg';
 
 export const useColor = () => {
     const colores = [
