@@ -5,7 +5,7 @@ import { useAuth } from "./useAuthContext";
 const ProtectedRoute = ({ children }) => {
     const { isAuthenticated } = useAuth();
 
-    return isAuthenticated ? children : <Navigate to="/michi-avatares" />;
+    return isAuthenticated ? children : <Navigate to="/" />;
 };
 
 export default ProtectedRoute;

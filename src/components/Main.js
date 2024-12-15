@@ -1,8 +1,8 @@
 import React from "react";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes, Navigate } from "react-router-dom";
 import { AuthProvider } from "../hooks/useAuthContext.js";
 import ProtectedRoute from "../hooks/useProtectedRoute.js";
-import WelcomePage from "./WelcomePage";
+import WelcomePage from "./WelcomePage.js";
 import AvatarPage from "./AvatarPage.js";
 
 const Main = () => {
@@ -18,6 +18,7 @@ const Main = () => {
                             </ProtectedRoute>
                         }
                     />
+                    <Route path="*" element={<Navigate to="/" replace />} />
                 </Routes>
             </Router>
         </AuthProvider>

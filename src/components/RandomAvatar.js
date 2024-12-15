@@ -1,5 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import { Button, Div, ElegantImage, ElegantCanvas } from '../Styles/Style';   
+import Inicio from '../image/Estatico/Inicio.png';
+import GifCarga from '../image/Estatico/GifCarga.gif';
 
 const RandomAvatar = ({ assets, width = 256, height = 256 }) => {
     const canvasRef = useRef(null);
@@ -7,8 +9,8 @@ const RandomAvatar = ({ assets, width = 256, height = 256 }) => {
     const [imageState, setImageState] = useState("default"); // 'default', 'loading', 'avatar'
     const [isGenerating, setIsGenerating] = useState(false); // Estado para habilitar/deshabilitar botones
 
-    const defaultImage = "michi-avatares/avatar/Img/Estatico/Inicio.png";
-    const loadingGif = "michi-avatares/avatar/Img/Estatico/GifCarga.gif";
+    const defaultImage = Inicio;
+    const loadingGif = GifCarga;
 
     // Función para cargar imágenes de forma asincrónica
     const loadImage = (src) => {
