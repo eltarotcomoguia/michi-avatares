@@ -7,8 +7,8 @@ const RandomAvatar = ({ assets, width = 256, height = 256 }) => {
     const [imageState, setImageState] = useState("default"); // 'default', 'loading', 'avatar'
     const [isGenerating, setIsGenerating] = useState(false); // Estado para habilitar/deshabilitar botones
 
-    const defaultImage = "michi-avatares/Img/Estatico/Inicio.png";
-    const loadingGif = "michi-avatares/Img/Estatico/GifCarga.gif";
+    const defaultImage = "michi-avatares/avatar/Img/Estatico/Inicio.png";
+    const loadingGif = "michi-avatares/avatar/Img/Estatico/GifCarga.gif";
 
     // Función para cargar imágenes de forma asincrónica
     const loadImage = (src) => {
