@@ -17,7 +17,7 @@ const WelcomePage = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        const correctPassword = "michi";
+        const correctPassword = "magnumopus22";
 
         if (password === correctPassword) {
             login();

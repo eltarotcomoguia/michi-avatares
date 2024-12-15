@@ -3,8 +3,9 @@ import { Button, Div, ElegantImage, ElegantCanvas } from '../Styles/Style';
 import Inicio from '../image/Estatico/Inicio.png';
 import GifCarga from '../image/Estatico/GifCarga.gif';
 
-const RandomAvatar = ({ assets, width = 256, height = 256 }) => {
-    const canvasRef = useRef(null);
+const RandomAvatar = ({ assets, width = 256, height = 256, downloadWidth = 800, downloadHeight = 800 }) => {
+    const canvasRef = useRef(null); // Canvas visible
+    const hiddenCanvasRef = useRef(null); // Canvas oculto
     const [layers, setLayers] = useState([]);
     const [imageState, setImageState] = useState("default"); // 'default', 'loading', 'avatar'
     const [isGenerating, setIsGenerating] = useState(false); // Estado para habilitar/deshabilitar botones
@@ -12,34 +13,22 @@ const RandomAvatar = ({ assets, width = 256, height = 256 }) => {
     const defaultImage = Inicio;
     const loadingGif = GifCarga;
 
-    // Función para cargar imágenes de forma asincrónica
     const loadImage = (src) => {
         return new Promise((resolve, reject) => {
             const img = new Image();
             img.src = src;
-            img.onload = () => {
-                //console.log(`Imagen cargada: ${src}`);
-                resolve(img);
-            };
-            img.onerror = () => {
-                //console.error(`Error cargando la imagen: ${src}`);
-                reject(new Error(`Error cargando la imagen: ${src}`));
-            };
+            img.onload = () => resolve(img);
+            img.onerror = () => reject(new Error(`Error cargando la imagen: ${src}`));
         });
     };
 
-    // Función para seleccionar aleatoriamente las capas de las imágenes
     const getRandomLayers = () => {
-        const randomLayers = Object.keys(assets).map((key) => {
+        return Object.keys(assets).map((key) => {
             const items = assets[key];
-            const randomImage = items[Math.floor(Math.random() * items.length)];
-            return randomImage;
+            return items[Math.floor(Math.random() * items.length)];
         });
-        //console.log("Capas seleccionadas:", randomLayers);
-        return randomLayers;
     };
 
-    // Función para cargar todas las imágenes de las capas
     const loadAllImages = async () => {
         setImageState("loading");
         setIsGenerating(true); // Deshabilitar botón
@@ -52,45 +41,39 @@ const RandomAvatar = ({ assets, width = 256, height = 256 }) => {
                 setIsGenerating(false); // Habilitar botón
             }, 2000); // Espera 2 segundos para mostrar el avatar
         } catch (error) {
-            //console.error("Error cargando las capas:", error);
             setImageState("default");
             setIsGenerating(false); // Habilitar botón
         }
     };
 
-    // Renderizar las capas en el canvas
-    useEffect(() => {
-        if (canvasRef.current && layers.length > 0) {
-            const canvas = canvasRef.current;
+    const renderCanvas = (canvas, layers, width, height) => {
+        if (canvas && layers.length > 0) {
             const ctx = canvas.getContext("2d");
+            ctx.clearRect(0, 0, width, height); // Limpia el canvas
+            ctx.fillStyle = "#ffffff"; // Fondo blanco
+            ctx.fillRect(0, 0, width, height); // Rellena el fondo
 
-            /*  if (!ctx) {
-                  console.error("Error: No se pudo obtener el contexto 2D del canvas.");
-                  return;
-              }
-              */
-
-            // Agregar fondo blanco al canvas
-            ctx.fillStyle = "#ffffff";
-            ctx.fillRect(0, 0, width, height);
-
-            // Dibujar cada capa en el canvas
-            layers.forEach((img, index) => {
-                ctx.drawImage(img, 0, 0, width, height); // Escalar las imágenes
-                //console.log(`Capa ${index} dibujada en el canvas.`);
+            layers.forEach((img) => {
+                ctx.drawImage(img, 0, 0, width, height); // Dibuja cada capa
             });
         }
-    }, [layers, width, height]);
+    };
 
-    // Generar un nuevo avatar aleatorio
+    useEffect(() => {
+        if (canvasRef.current) {
+            renderCanvas(canvasRef.current, layers, width, height); // Renderiza en el canvas visible
+        }
+        if (hiddenCanvasRef.current) {
+            renderCanvas(hiddenCanvasRef.current, layers, downloadWidth, downloadHeight); // Renderiza en el canvas oculto
+        }
+    }, [layers, width, height, downloadWidth, downloadHeight]);
+
     const generateRandomAvatar = () => {
-        // console.log("Generando avatar...");
         loadAllImages();
     };
 
-    // Descargar el avatar generado
     const downloadAvatar = () => {
-        const canvas = canvasRef.current;
+        const canvas = hiddenCanvasRef.current; // Usa el canvas oculto
         if (canvas) {
             const imageURL = canvas.toDataURL("image/png");
             const link = document.createElement("a");
@@ -118,7 +101,7 @@ const RandomAvatar = ({ assets, width = 256, height = 256 }) => {
                     height={height}
                 />
             )}
-            {/* El canvas siempre está presente pero oculto si no es necesario */}
+            {/* Canvas visible */}
             <ElegantCanvas
                 ref={canvasRef}
                 width={width}
@@ -126,6 +109,13 @@ const RandomAvatar = ({ assets, width = 256, height = 256 }) => {
                 style={{
                     display: imageState === "avatar" ? "inline" : "none",
                 }}
+            />
+            {/* Canvas oculto */}
+            <canvas
+                ref={hiddenCanvasRef}
+                width={downloadWidth}
+                height={downloadHeight}
+                style={{ display: "none" }}
             />
             <Div boton>
                 <Button atras onClick={generateRandomAvatar} disabled={isGenerating}>
