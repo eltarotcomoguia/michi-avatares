@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.js": "/michi-avatares/static/js/main.37c603fd.js",
+    "main.js": "/michi-avatares/static/js/main.8b977e9f.js",
     "static/media/F15.PNG": "/michi-avatares/static/media/F15.ebe84bc61e23082b3f02.PNG",
     "static/media/F24.PNG": "/michi-avatares/static/media/F24.c4a0fd8f64cf307971c3.PNG",
     "static/media/F22.PNG": "/michi-avatares/static/media/F22.ba0fdb4d43654efc8d30.PNG",
@@ -106,9 +106,9 @@
     "static/media/O4.PNG": "/michi-avatares/static/media/O4.c9bb9cb38aa6d7c9e8ca.PNG",
     "static/media/Inicio.png": "/michi-avatares/static/media/Inicio.0da78784bbfcfe0e37ec.png",
     "index.html": "/michi-avatares/index.html",
-    "main.37c603fd.js.map": "/michi-avatares/static/js/main.37c603fd.js.map"
+    "main.8b977e9f.js.map": "/michi-avatares/static/js/main.8b977e9f.js.map"
   },
   "entrypoints": [
-    "static/js/main.37c603fd.js"
+    "static/js/main.8b977e9f.js"
   ]
 }
