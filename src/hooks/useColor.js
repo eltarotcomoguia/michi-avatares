@@ -1,4 +1,6 @@
 import fondo1 from '../image/Fondo/fondo1.jpg';
+import fondo2 from '../image/Fondo/fondo2.jpeg';
+import fondo3 from '../image/Fondo/fondo3.jpeg';
 
 export const useColor = () => {
     const colores = [
@@ -7,7 +9,7 @@ export const useColor = () => {
         '#472E32'
     ];
 
-    const imagenes = [fondo1];
+    const imagenes = [fondo1,fondo2,fondo3];
 
     const getLuminosity = (hex) => {
         const r = parseInt(hex.slice(1, 3), 16) / 255;
